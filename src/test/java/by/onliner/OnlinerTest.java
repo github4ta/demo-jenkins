@@ -15,7 +15,7 @@ public class OnlinerTest {
     @BeforeEach
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        options.addArguments("--headless=new"); // ОБЯЗАТЕЛЬНО для GitHub Actions
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         driver = new ChromeDriver(options);

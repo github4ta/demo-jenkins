@@ -3,12 +3,12 @@ name: Java CI with Maven and Selenium
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  schedule:
+    - cron: '*/2 * * * *' # Запуск каждые 2 минуты (если нужно)
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Это Linux-сервер GitHub
 
     steps:
       - name: Checkout code
@@ -17,9 +17,10 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '17' # Укажите вашу версию Java
+          java-version: '17'
           distribution: 'temurin'
           cache: maven
 
       - name: Run tests with Maven
+        # Для Linux в GitHub Actions браузер ОБЯЗАТЕЛЬНО должен быть в headless режиме
         run: mvn -B test
